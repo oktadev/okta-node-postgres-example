@@ -11,6 +11,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.use('/titles', require('./titles'))
+app.use('/services', require('./services'))
 
 const port = process.env.SERVER_PORT || 3000
 
