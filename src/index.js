@@ -12,6 +12,7 @@ app.use(bodyParser.json())
 
 app.use('/titles', require('./titles'))
 app.use('/services', require('./services'))
+app.use('/my-titles', require('./my-titles'))
 
 const port = process.env.SERVER_PORT || 3000
 

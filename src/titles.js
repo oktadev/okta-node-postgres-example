@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
   try {
     res.json(await omdb.search(req.query.s))
   } catch (error) {
-    next(error.message)
+    res.json({ error: error.message })
   }
 })
 
@@ -19,7 +19,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     res.json(await omdb.getTitle(req.params.id))
   } catch (error) {
-    next(error.message)
+    res.json({ error: error.message })
   }
 })
 

@@ -6,23 +6,32 @@ const database = new Sequelize({
   operatorsAliases: Sequelize.Op
 })
 
+const Title = database.define('title', {
+  id: { type: Sequelize.STRING, primaryKey: true },
+  title: { type: Sequelize.JSONB, allowNull: false }
+})
+
 const Service = database.define('service', {
   userId: { type: Sequelize.STRING, unique: 'user-name', allowNull: false },
   name: { type: Sequelize.STRING, unique: 'user-name', allowNull: false }
 })
 
 const TitleService = database.define('title_service', {
-  titleId: { type: Sequelize.STRING, unique: 'user-title' },
   location: Sequelize.STRING
 })
 
+TitleService.belongsTo(Title, {
+  foreignKey: { allowNull: false, unique: 'title-service' },
+  onDelete: 'cascade'
+})
+
 TitleService.belongsTo(Service, {
-  uniqueKey: 'user-title',
-  foreignKey: { allowNull: false },
+  foreignKey: { allowNull: false, unique: 'title-service' },
   onDelete: 'cascade'
 })
 
 module.exports = {
+  Title,
   Service,
   TitleService,
   database
