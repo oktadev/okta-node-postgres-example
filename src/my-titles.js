@@ -6,6 +6,8 @@ const router = express.Router()
 
 router.get('/', async (req, res, next) => {
   try {
+    const full = 'full' in req.query
+
     const data = await TitleService.findAll({
       attributes: ['id', 'location'],
       where: { '$service.userId$': 'TODO' },
@@ -21,10 +23,12 @@ router.get('/', async (req, res, next) => {
     console.log(data)
 
     res.json(
-      data.map(({ id, location, title, service }) => ({
+      data.map(({ id, location, title: { title }, service }) => ({
         id,
         location,
-        title: title.title,
+        title: full
+          ? title
+          : { id: title.imdbID, name: `${title.Title} (${title.Year})` },
         service: { id: service.id, name: service.name }
       }))
     )
