@@ -37,7 +37,7 @@ Your Okta application should have settings similar to the following:
 
 ![Okta Application Settings](images/okta-app-settings.png)
 
-You will also need to sign up for an API token with [The Open Movie Database](http://www.omdbapi.com/apikey.aspx).
+You will also need to sign up for an API token with [The Open Movie Database](https://www.omdbapi.com/apikey.aspx).
 
 Now create a file called `.env` in the project root and add the following variables, replacing the values with your own from the previous steps.
 
