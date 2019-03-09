@@ -11,10 +11,13 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@okta/jwt-verifier": "0.0.14",
+    "@okta/oidc-middleware": "2.0.0",
     "body-parser": "1.18.3",
     "cors": "2.8.5",
     "dotenv": "6.2.0",
     "express": "4.16.4",
+    "express-session": "1.15.6",
     "node-fetch": "2.3.0",
     "nodemon": "1.18.10",
     "pg": "7.8.1",

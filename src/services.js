@@ -5,16 +5,18 @@ const { Service } = require('./database')
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
+  const { userId } = req
   res.json(await Service.findAll({
     attributes: ['id', 'name'],
-    where: { userId: 'TODO' }
+    where: { userId }
   }))
 })
 
 router.post('/', async (req, res, next) => {
   try {
+    const { userId } = req
     const { name } = req.body
-    const { id } = await Service.create({ userId: 'TODO', name })
+    const { id } = await Service.create({ userId, name })
     res.json({ success: true, id })
   } catch (error) {
     res.json({ success: false, error: error.message })
@@ -23,8 +25,9 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
+    const { userId } = req
     const { id } = req.params
-    if (await Service.destroy({ where: { userId: 'TODO', id } })) {
+    if (await Service.destroy({ where: { userId, id } })) {
       res.json({ success: true })
     }
   } catch (error) { }

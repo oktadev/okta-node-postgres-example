@@ -7,10 +7,11 @@ const router = express.Router()
 router.get('/', async (req, res, next) => {
   try {
     const full = 'full' in req.query
+    const { userId } = req
 
     const data = await TitleService.findAll({
       attributes: ['id', 'location'],
-      where: { '$service.userId$': 'TODO' },
+      where: { '$service.userId$': userId },
       include: [{
         model: Title,
         attributes: ['title']
@@ -19,8 +20,6 @@ router.get('/', async (req, res, next) => {
         attributes: ['id', 'name']
       }]
     })
-
-    console.log(data)
 
     res.json(
       data.map(({ id, location, title: { title }, service }) => ({
@@ -44,7 +43,7 @@ router.post('/', async (req, res, next) => {
     await Title.upsert({ id: titleId, title: await getTitle(titleId) })
 
     const { userId } = await Service.findByPk(serviceId)
-    if (userId === 'TODO') {
+    if (userId === req.userId) {
       const { id } = await TitleService.create({ titleId, serviceId, location })
 
       return res.json({ id })
@@ -60,8 +59,9 @@ router.put('/:id', async (req, res, next) => {
   try {
     const { location } = req.body
     const { id } = req.params
+    const { userId } = req
 
-    if (await TitleService.update({ location }, { where: { userId: 'TODO', id } })) {
+    if (await TitleService.update({ location }, { where: { userId, id } })) {
       return res.json({ id })
     }
   } catch (error) { }
@@ -72,7 +72,9 @@ router.put('/:id', async (req, res, next) => {
 router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params
-    if (await TitleService.destroy({ where: { userId: 'TODO', id } })) {
+    const { userId } = req
+
+    if (await TitleService.destroy({ where: { userId, id } })) {
       return res.json({ id: null })
     }
   } catch (error) { }
