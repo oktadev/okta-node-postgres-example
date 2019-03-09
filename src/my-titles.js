@@ -61,10 +61,14 @@ router.put('/:id', async (req, res, next) => {
     const { id } = req.params
     const { userId } = req
 
-    if (await TitleService.update({ location }, { where: { userId, id } })) {
+    const titleService = await TitleService.findByPk(id, { include: [{ model: Service }] })
+    if (titleService && titleService.service.userId === userId) {
+      await titleService.update({ location })
       return res.json({ id })
     }
-  } catch (error) { }
+  } catch (error) {
+    console.log(error)
+  }
 
   res.json({ error: 'Invalid ID' })
 })
@@ -74,10 +78,14 @@ router.delete('/:id', async (req, res, next) => {
     const { id } = req.params
     const { userId } = req
 
-    if (await TitleService.destroy({ where: { userId, id } })) {
-      return res.json({ id: null })
+    const titleService = await TitleService.findByPk(id, { include: [{ model: Service }] })
+    if (titleService && titleService.service.userId === userId) {
+      await titleService.destroy()
+      res.json({ success: true })
     }
-  } catch (error) { }
+  } catch (error) {
+    console.log(error)
+  }
 
   res.json({ error: 'Invalid ID' })
 })
