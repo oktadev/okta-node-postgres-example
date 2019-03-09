@@ -4,11 +4,9 @@ const omdb = require('./omdb')
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
-  if (!req.query.s) {
-    return next('Search param (`s`) required')
-  }
-
   try {
+    if (!req.query.s) throw new Error('Search param (`s`) required')
+
     res.json(await omdb.search(req.query.s))
   } catch (error) {
     res.json({ error: error.message })
