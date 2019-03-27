@@ -1,6 +1,6 @@
 # Sample REST API with Node and Postgres
 
-This is an example of a simple REST API with secure user authentication using Express, PostgreSQL, and Okta. This API allows users to keep track of their own library of movies and TV shows across multiple services.
+This is an example of a simple REST API with secure user authentication using Express, PostgreSQL, and Okta. This API allows users to keep track of their own library of movies and TV shows across multiple services. The tutorial for creating this project is on the [Okta Developer blog](https://developer.okta.com/blog/2019/03/27/build-rest-api-with-node-and-postgres).
 
 **Prerequisites**:
   * [Node.js](https://nodejs.org/en/)
