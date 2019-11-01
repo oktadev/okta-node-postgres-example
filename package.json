@@ -20,7 +20,7 @@
     "express-session": "1.15.6",
     "node-fetch": "2.3.0",
     "pg": "7.8.1",
-    "sequelize": "4.43.0"
+    "sequelize": "5.15.1"
   },
   "devDependencies": {
     "nodemon": "1.18.10",
