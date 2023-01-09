@@ -12,7 +12,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@okta/jwt-verifier": "0.0.14",
-    "@okta/oidc-middleware": "2.0.0",
+    "@okta/oidc-middleware": "5.0.0",
     "body-parser": "1.18.3",
     "cors": "2.8.5",
     "dotenv": "6.2.0",
